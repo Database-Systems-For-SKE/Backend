@@ -85,20 +85,25 @@ request.fail(function (xhr, status, error) {
 ------
 
 # json format
-- [X] Insert Customer **(POST Method)**
- ```json
- {
+- [X] version **(GET Method)** v3.1.0  
+It's special request, because there no need to parse anything to the server
+so you can get the json version by run `<link>?version` (`<link>` = the link of backend)
+    - the result will have 2 key like other first is *success* and second is *version*
+
+- [X] Insert Customer **(POST Method)** v3.1.0
+```json
+  {
      "action":"insert_customer",
      "first_s": "first name",
      "last_s": "last name",
      "address_s": "address",
      "email_s": "email",
      "password": "md5 encryption"
- }
- ```
+  }
+```
  
-- [X] Update Customer **(POST Method)**
-  ```json
+- [X] Update Customer **(POST Method)** v3.1.0
+```json
   {
       "action":"update_customer",
       "fields_a": [
@@ -110,9 +115,9 @@ request.fail(function (xhr, status, error) {
       "email_s": "email",
       "password": "md5 encryption"
   }
-  ```
+```
   
-- [X] Search Customer by password **(POST Method)**
+- [X] Search Customer by password **(POST Method)** v3.1.0
 ```json
   {
       "action":"search_customer",
@@ -121,7 +126,7 @@ request.fail(function (xhr, status, error) {
   }
 ```
 
-- [X] get All Data from table **(GET Method)**
+- [X] get All Data from table **(GET Method)** v3.1.0
 ```json
   {
       "action":"select_all",
@@ -132,7 +137,7 @@ request.fail(function (xhr, status, error) {
   }
 ```
 
-- [X] get some column **(GET Method)**
+- [X] get some column **(GET Method)** v3.1.0
 ```json
   {
       "action":"select",
@@ -171,7 +176,7 @@ request.fail(function (xhr, status, error) {
   }
 ```
 
-- [X] login (get_customer_id) **(POST Method)**
+- [X] login (get_customer_id) **(POST Method)** v3.1.0
 ```json
   {
       "action":"login",
