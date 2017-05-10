@@ -42,12 +42,12 @@ class Limitation
      * @param array $actual get from $_GET, $_POST etc.
      * @return false|string string when have error occurred.
      */
-    public static function is_required($method, array $expected, array $actual)
+    public static function is_required(array $expected, array $actual)
     {
         $str = "";
         $error = false;
         foreach ($expected as $req) {
-            if (!isset($actual[$req])) {
+            if (!isset($actual[$req]) or $actual[$req] == "") {
                 $error = true;
                 $str .= "`" . $req . "`" . " ";
             }
