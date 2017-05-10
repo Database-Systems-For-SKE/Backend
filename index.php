@@ -30,9 +30,9 @@ header('Content-Type: application/json');
 
 $method = $_SERVER['REQUEST_METHOD'];
 $actual_array = [];
-if ($method == 'GET') {
+if ($method == Information::GET) {
     $actual_array = $_GET;
-} else if ($method == 'POST') {
+} else if ($method == Information::POST) {
     $actual_array = $_POST;
 } else {
     http_response_code(405);
@@ -41,6 +41,14 @@ if ($method == 'GET') {
 
 if (count($actual_array) == 0) {
     die(failureToJSON("If you don't know how to use this api, go to https://api.kamontat.me/docs to learn it."));
+}
+
+/* ------------------------------------------------------------------------------------ */
+// Version Section
+/* ------------------------------------------------------------------------------------ */
+
+if ($method == Information::GET and isset($actual_array[Information::VERSION])) {
+    die(toJSON(true, array("version" => Information::VERSION_NAME)));
 }
 
 /* ------------------------------------------------------------------------------------ */

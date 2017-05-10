@@ -8,6 +8,9 @@
  */
 class Information
 {
+    const VERSION_NAME = "v3.1.0";
+    const VERSION = "version";
+
     const array = "array";
     const string = "string";
     const int = "integer";

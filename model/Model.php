@@ -11,7 +11,7 @@ class DatabaseModel
     /**
      * @var bool
      */
-    public $PRODUCTION = false; /* true */
+    public $PRODUCTION = false; /* true/false */
 
     /**
      * @var mysqli
