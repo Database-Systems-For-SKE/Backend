@@ -61,23 +61,11 @@ $expected_array = Information::get_required_key($action);
 // Method allow Section
 /* ------------------------------------------------------------------------------------ */
 
-// first element of get_required_parameter() is expected method
+// First element of get_required_parameter() is expected method
 if (array_shift($expected_array) != $method) {
     http_response_code(405);
     die($action . " not allow to sent by " . $method . " method.");
 }
-
-/* ------------------------------------------------------------------------------------ */
-// Condition Configuration Section
-/* ------------------------------------------------------------------------------------ */
-
-// insert ' to condition, if condition exist
-if (key_exists(Information::CONDITION, $actual_array))
-    $actual_array[Information::CONDITION] = convert_condition($actual_array[Information::CONDITION]);
-
-// encryption password
-if (key_exists(Information::PASSWORD, $actual_array))
-    $actual_array[Information::PASSWORD] = md5($actual_array[Information::PASSWORD]);
 
 /* ------------------------------------------------------------------------------------ */
 // Data Management Section
@@ -87,7 +75,7 @@ if (key_exists(Information::PASSWORD, $actual_array))
 // print_r($expected_array);
 // print_r($actual_array);
 
-$str = Limitation::is_required($method, $expected_array, $actual_array);
+$str = Limitation::is_required($expected_array, $actual_array);
 if (is_string($str)) {
     http_response_code(400);
     die(failureToJSON($str));
@@ -95,6 +83,18 @@ if (is_string($str)) {
 
 // get result array (key and value)
 $result_array = fetch_required_to_array($expected_array, $actual_array);
+
+/* ------------------------------------------------------------------------------------ */
+// Configuration Data Section
+/* ------------------------------------------------------------------------------------ */
+
+// insert ' to condition, if condition exist
+if (key_exists(Information::CONDITION, $result_array))
+    $result_array[Information::CONDITION] = convert_condition($result_array[Information::CONDITION]);
+
+// encryption password
+if (key_exists(Information::PASSWORD, $result_array))
+    $result_array[Information::PASSWORD] = md5($result_array[Information::PASSWORD]);
 
 /* ------------------------------------------------------------------------------------ */
 // query Section
