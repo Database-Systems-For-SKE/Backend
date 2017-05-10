@@ -75,6 +75,10 @@ if (array_shift($expected_array) != $method) {
 if (key_exists(Information::CONDITION, $actual_array))
     $actual_array[Information::CONDITION] = convert_condition($actual_array[Information::CONDITION]);
 
+// encryption password
+if (key_exists(Information::PASSWORD, $actual_array))
+    $actual_array[Information::PASSWORD] = md5($actual_array[Information::PASSWORD]);
+
 /* ------------------------------------------------------------------------------------ */
 // Data Management Section
 /* ------------------------------------------------------------------------------------ */
