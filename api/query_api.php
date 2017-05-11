@@ -7,6 +7,10 @@
  */
 include $_SERVER['DOCUMENT_ROOT'] . '/model/Model.php';
 
+
+/**
+ * @var bool
+ */
 $model = null;
 
 /**
@@ -16,7 +20,7 @@ $model = null;
 function connect()
 {
     if (!isset($GLOBALS['model']))
-        $GLOBALS['model'] = new DatabaseModel(false /* true */);
+        $GLOBALS['model'] = new DatabaseModel(false /* true|false */);
     $GLOBALS['model']->connection();
     return $GLOBALS['model'];
 }
@@ -128,18 +132,26 @@ function delete_all($table)
 function booking($customer_id, $room_type_id, $night, $in, $out)
 {
     $column = "roomID";
+
     // select part
     $json = select("Room", "MIN(roomID) AS " . $column, array("typeID=" . $room_type_id, "roomStatus=0"));
     if (!JSON_isTrue($json)) return $json;
+
     $result_selection = json_decode($json, true);
     if (!key_exists($column, $result_selection)) return failureToJSON("Room id not exist.");
+
     $room_id = $result_selection[$column];
     if ($room_id == "") return failureToJSON("No room available.");
+
     // update part
-    $json = update("Room", array("roomStatus=1"), $column . "=" . $room_id);
+    $json = update_room_status($room_id, 1);
     if (!JSON_isTrue($json)) return $json;
-    // select part (again)
-    return insert_booking(array($night, $in, $out, $room_id, $customer_id));
+
+    // insert part
+    $json = insert_booking(array($night, $in, $out, $room_id, $customer_id));
+    if (!JSON_isTrue($json))
+        update_room_status($room_id, 0); // reverse insert
+    return $json;
 }
 
 function insert_customer(array $new_values)
@@ -161,6 +173,11 @@ function update_customer($email, $pass, array $sets)
 {
     $json = json_decode(search_customer($email, $pass), true);
     return update("CustomerDetail", $sets, "customerID=" . $json['customerID']);
+}
+
+function update_room_status($room_id, int $status_no)
+{
+    return update("Room", array("roomStatus=" . $status_no), "roomID=" . $room_id);
 }
 
 /**
