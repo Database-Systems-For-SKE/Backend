@@ -152,6 +152,16 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
   }
 ```
 
+- [X] Insert Payment **(POST Method)** v3.1.1
+```json
+  {
+     "action":"insert_payment",
+     "card_name_s": "name in card",
+     "card_number_s": "card number",
+     "expire_data_s": "expire data"
+  }
+```
+
 - [ ] booking room **(POST Method)**
 1. v1
 ```json

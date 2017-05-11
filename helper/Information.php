@@ -8,7 +8,7 @@
  */
 class Information
 {
-    const VERSION_NAME = "v3.1.0";
+    const VERSION_NAME = "v3.1.1";
     const VERSION = "version";
 
     const array = "array";
@@ -33,6 +33,10 @@ class Information
     const CHECK_IN = "check_in_s";
     const CHECK_OUT = "check_out_s";
 
+    const CARD_NAME = "card_name_s";
+    const CARD_NO = "card_number_s";
+    const EXPIRE_DATE = "expire_data_s";
+
     const ROOM_ID = "room_id_i";
 
     const PASSWORD = "password";
@@ -53,6 +57,9 @@ class Information
                 break;
             case "insert_customer":
                 return array(Information::POST, Information::FIRST_NAME, Information::LAST_NAME, Information::ADDRESS, Information::EMAIL, Information::PASSWORD);
+                break;
+            case "insert_payment":
+                return array(Information::POST, Information::CARD_NAME, Information::CARD_NO, Information::EXPIRE_DATE);
                 break;
             case "update_customer":
                 return array(Information::POST, Information::FIELD, Information::NEW_VALUE, Information::EMAIL, Information::PASSWORD);

@@ -135,6 +135,11 @@ function insert_customer(array $new_values)
     return insert("CustomerDetail", $new_values, 1); // offset id out.
 }
 
+function insert_payment(array $new_values)
+{
+    return insert("Payment", $new_values, 1); // offset id out.
+}
+
 function update_customer($email, $pass, array $sets)
 {
     $json = json_decode(search_customer($email, $pass), true);
