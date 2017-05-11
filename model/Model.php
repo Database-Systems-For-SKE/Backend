@@ -9,11 +9,6 @@
 class DatabaseModel
 {
     /**
-     * @var bool
-     */
-    public $PRODUCTION = false; /* true|false */
-
-    /**
      * @var mysqli
      */
     public $database;
