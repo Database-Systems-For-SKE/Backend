@@ -169,8 +169,8 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
       "customer_id_i": -1,
       "room_type_id_i":1001,
       "night_i":1,
-      "check_in_s":"date",
-      "check_out_s":"date"
+      "check_in_s":"date (yyyy-mm-dd)",
+      "check_out_s":"date (yyyy-mm-dd)"
   }
 ```
 
