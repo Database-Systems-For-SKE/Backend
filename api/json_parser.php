@@ -54,4 +54,16 @@ function sqlToJSON($result)
     }
 }
 
+/**
+ * @param $json string json string
+ * @return bool
+ */
+function JSON_isTrue($json)
+{
+    $json_de = json_decode($json, true);
+
+    if (!key_exists("success", $json_de)) return false;
+    return $json_de['success'] === "true";
+}
+
 ?>

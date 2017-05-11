@@ -135,7 +135,7 @@ switch ($action) {
         echo search_customer($result_array[Information::EMAIL], $result_array[Information::PASSWORD]);
         break;
     case "booking":
-        echo failureToJSON("Not implement yet!");
+        echo booking($result_array[Information::CUSTOMER_ID], $result_array[Information::ROOM_TYPE_ID], $result_array[Information::NIGHT], $result_array[Information::CHECK_IN], $result_array[Information::CHECK_OUT]);
         break;
     case "login":
         echo get_customer_id($result_array[Information::EMAIL], $result_array[Information::PASSWORD]);

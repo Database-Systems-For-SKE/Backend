@@ -125,9 +125,16 @@ function delete_all($table)
 
 // new implementation
 
-function booking($email, $pass, $night, $in, $out, $roomID)
+function booking($customer_id, $room_type_id, $night, $in, $out)
 {
-    // not implement yet!
+    $column = "roomID";
+    $json = select("Room", "MIN(roomID) AS " . $column, array("typeID=" . $room_type_id, "roomStatus=0"));
+    if (!JSON_isTrue($json)) return $json;
+    $result_selection = json_decode($json, true);
+    if (!key_exists($column, $result_selection)) return failureToJSON("Room id not exist.");
+    $id = $result_selection[$column];
+    if ($id == "") return failureToJSON("No room available.");
+    return update("Room", array("roomStatus=1"), $column . "=" . $id);
 }
 
 function insert_customer(array $new_values)
@@ -164,9 +171,4 @@ function search_customer(string $email, string $password)
     if (!is_string($result)) return $result;
     // else if (!isset($result)) return toJSON(true, array("customerID" => "Not found")); // search and nothing found
     return $result;
-}
-
-function search_room()
-{
-    // not implement yet!
 }

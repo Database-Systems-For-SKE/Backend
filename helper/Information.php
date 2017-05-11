@@ -8,7 +8,7 @@
  */
 class Information
 {
-    const VERSION_NAME = "v3.1.1";
+    const VERSION_NAME = "v3.2.0";
     const VERSION = "version";
 
     const array = "array";
@@ -37,7 +37,8 @@ class Information
     const CARD_NO = "card_number_s";
     const EXPIRE_DATE = "expire_data_s";
 
-    const ROOM_ID = "room_id_i";
+    const CUSTOMER_ID = "customer_id_i";
+    const ROOM_TYPE_ID = "room_type_id_i";
 
     const PASSWORD = "password";
 
@@ -68,7 +69,7 @@ class Information
                 return array(Information::POST, Information::EMAIL, Information::PASSWORD);
                 break;
             case "booking":
-                return array(Information::POST, Information::EMAIL, Information::PASSWORD, Information::ROOM_ID, Information::NIGHT, Information::CHECK_IN, Information::CHECK_OUT);
+                return array(Information::POST, Information::CUSTOMER_ID, Information::ROOM_TYPE_ID, Information::NIGHT, Information::CHECK_IN, Information::CHECK_OUT);
             case "login":
                 return array(Information::POST, Information::EMAIL, Information::PASSWORD);
             default:

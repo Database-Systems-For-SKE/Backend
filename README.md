@@ -162,25 +162,12 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
   }
 ```
 
-- [ ] booking room **(POST Method)**
-1. v1
-```json
-  {
-      "action":"booking",
-      "email_s":"email",
-      "password":"md5 encryption",
-      "room_id_i":1001,
-      "night_i":1,
-      "check_in_s":"date",
-      "check_out_s":"date"
-  }
-```
-2. v2
+- [X] booking room **(POST Method)** v3.2.0
 ```json
   {
       "action":"booking",
       "customer_id_i": -1,
-      "room_id_i":1001,
+      "room_type_id_i":1001,
       "night_i":1,
       "check_in_s":"date",
       "check_out_s":"date"
@@ -195,12 +182,6 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
       "password":"md5 encryption"
   }
 ```
-
-- [ ] delete customer **(POST Method)**
-
-- [ ] filter rooms **(GET Method)**
-
-- [ ] cancel room **(POST Method)**
 
 
 ### Output
