@@ -128,13 +128,18 @@ function delete_all($table)
 function booking($customer_id, $room_type_id, $night, $in, $out)
 {
     $column = "roomID";
+    // select part
     $json = select("Room", "MIN(roomID) AS " . $column, array("typeID=" . $room_type_id, "roomStatus=0"));
     if (!JSON_isTrue($json)) return $json;
     $result_selection = json_decode($json, true);
     if (!key_exists($column, $result_selection)) return failureToJSON("Room id not exist.");
-    $id = $result_selection[$column];
-    if ($id == "") return failureToJSON("No room available.");
-    return update("Room", array("roomStatus=1"), $column . "=" . $id);
+    $room_id = $result_selection[$column];
+    if ($room_id == "") return failureToJSON("No room available.");
+    // update part
+    $json = update("Room", array("roomStatus=1"), $column . "=" . $room_id);
+    if (!JSON_isTrue($json)) return $json;
+    // select part (again)
+    return insert_booking(array($night, $in, $out, $room_id, $customer_id));
 }
 
 function insert_customer(array $new_values)
@@ -145,6 +150,11 @@ function insert_customer(array $new_values)
 function insert_payment(array $new_values)
 {
     return insert("Payment", $new_values, 1); // offset id out.
+}
+
+function insert_booking(array $new_values)
+{
+    return insert("Booking", $new_values, 1); // offset id out.
 }
 
 function update_customer($email, $pass, array $sets)
