@@ -144,8 +144,8 @@ function booking($customer_id, $room_type_id, $night, $in, $out)
     if ($room_id == "") return failureToJSON("No room available.");
 
     // update part
-    $json = update_room_status($room_id, 1);
-    if (!JSON_isTrue($json)) return $json;
+    // $json = update_room_status($room_id, 1);
+    // if (!JSON_isTrue($json)) return $json;
 
     // insert part
     $json = insert_booking(array($night, $in, $out, $room_id, $customer_id));
@@ -175,9 +175,13 @@ function update_customer($email, $pass, array $sets)
     return update("CustomerDetail", $sets, "customerID=" . $json['customerID']);
 }
 
-function update_room_status($room_id, int $status_no)
+function update_room_status($room_id, $type, $password)
 {
-    return update("Room", array("roomStatus=" . $status_no), "roomID=" . $room_id);
+    $status_no = $type === "come" ? 1 : 0;
+    if ($password === "af2484872f37e8c42b5c350df91b5217") {
+        return update("Room", array("roomStatus=" . $status_no), "roomID=" . $room_id);
+    }
+    return failureToJSON("You NOT allow to update room status");
 }
 
 /**

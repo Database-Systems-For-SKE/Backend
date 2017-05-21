@@ -174,6 +174,16 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
   }
 ```
 
+- [X] update room status **(POST Method)** v3.1.0
+```json
+  {
+      "action":"update_room_status",
+      "room_id_i":1001,
+      "update_type_s": "come|leave",
+      "password":"MERRYGRAND"
+  }
+```
+
 - [X] login (get_customer_id) **(POST Method)** v3.1.0
 ```json
   {
@@ -182,6 +192,8 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
       "password":"md5 encryption"
   }
 ```
+
+
 
 
 ### Output

@@ -39,6 +39,9 @@ class Information
 
     const CUSTOMER_ID = "customer_id_i";
     const ROOM_TYPE_ID = "room_type_id_i";
+    const ROOM_ID = "room_id_i";
+
+    const UPDATE_TYPE = "update_type_s";
 
     const PASSWORD = "password";
 
@@ -70,6 +73,8 @@ class Information
                 break;
             case "booking":
                 return array(Information::POST, Information::CUSTOMER_ID, Information::ROOM_TYPE_ID, Information::NIGHT, Information::CHECK_IN, Information::CHECK_OUT);
+            case "update_room_type":
+                return array(Information::POST, Information::ROOM_ID, Information::UPDATE_TYPE, Information::PASSWORD);
             case "login":
                 return array(Information::POST, Information::EMAIL, Information::PASSWORD);
             default:

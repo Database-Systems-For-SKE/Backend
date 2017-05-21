@@ -137,6 +137,9 @@ switch ($action) {
     case "booking":
         echo booking($result_array[Information::CUSTOMER_ID], $result_array[Information::ROOM_TYPE_ID], $result_array[Information::NIGHT], $result_array[Information::CHECK_IN], $result_array[Information::CHECK_OUT]);
         break;
+    case "update_room_status":
+        echo update_room_status($result_array[Information::ROOM_ID], $result_array[Information::UPDATE_TYPE], $result_array[Information::PASSWORD]);
+        break;
     case "login":
         echo get_customer_id($result_array[Information::EMAIL], $result_array[Information::PASSWORD]);
         break;
