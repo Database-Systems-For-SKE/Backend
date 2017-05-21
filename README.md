@@ -91,7 +91,7 @@ It's special request, because there no need to parse anything to the server
 so you can get the json version by run `<link>?version` (`<link>` = the link of backend)
     - the result will have 2 key like other first is *success* and second is *version*
 
-- [X] Insert Customer **(POST Method)** v3.1.0
+- [X] Insert Customer **(POST Method)** v3.1.0 (return value at v3.3.0)
 ```json
   {
      "action":"insert_customer",
@@ -175,7 +175,7 @@ so you can get the json version by run `<link>?version` (`<link>` = the link of 
   }
 ```
 
-- [X] update room status **(POST Method)** v3.1.0
+- [X] update room status **(POST Method)** v3.3.0
 ```json
   {
       "action":"update_room_status",

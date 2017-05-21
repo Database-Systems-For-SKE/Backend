@@ -149,14 +149,20 @@ function booking($customer_id, $room_type_id, $night, $in, $out)
 
     // insert part
     $json = insert_booking(array($night, $in, $out, $room_id, $customer_id));
-    if (!JSON_isTrue($json))
-        update_room_status($room_id, 0); // reverse insert
+    // if (!JSON_isTrue($json))
+    //     update_room_status($room_id, 0); // reverse insert
     return $json;
 }
 
 function insert_customer(array $new_values)
 {
-    return insert("CustomerDetail", $new_values, 1); // offset id out.
+    $raw = insert("CustomerDetail", $new_values, 1);
+    $json = json_decode($raw, true); // offset id out.
+    if ($json['success'] === "true") {
+        $condition = array("firstName=" . $new_values[Information::FIRST_NAME], "lastName=" . $new_values[Information::LAST_NAME], "address=" . $new_values[Information::ADDRESS], "email=" . $new_values[Information::EMAIL], "password=" . $new_values[Information::PASSWORD]);
+        return select("CustomerDetail", "customerID", convert_condition($condition));
+    }
+    return $raw;
 }
 
 function insert_payment(array $new_values)

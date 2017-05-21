@@ -8,7 +8,7 @@
  */
 class Information
 {
-    const VERSION_NAME = "v3.2.1";
+    const VERSION_NAME = "v3.3.0";
     const VERSION = "version";
 
     const array = "array";
