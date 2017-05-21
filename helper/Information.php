@@ -74,7 +74,7 @@ class Information
                 break;
             case "booking":
                 return array(Information::POST, Information::CUSTOMER_ID, Information::ROOM_TYPE_ID, Information::NIGHT, Information::CHECK_IN, Information::CHECK_OUT);
-            case "update_room_type":
+            case "update_room_status":
                 return array(Information::POST, Information::ROOM_ID, Information::UPDATE_TYPE, Information::PASSWORD);
             case "login":
                 return array(Information::POST, Information::EMAIL, Information::PASSWORD);
