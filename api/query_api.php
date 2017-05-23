@@ -199,7 +199,7 @@ function update_room_status($room_id, $type, $password)
 function get_customer_id($email, $pass)
 {
     // select only customer_id
-    return select("CustomerDetail", "CustomerID", array("email='" . $email . "'", "password='" . $pass . "'"));
+    return select("CustomerDetail", "customerID", array("email='" . $email . "'", "password='" . $pass . "'"));
 }
 
 function search_customer(string $email, string $password)
