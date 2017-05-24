@@ -148,10 +148,13 @@ function booking($customer_id, $room_type_id, $night, $in, $out)
     // if (!JSON_isTrue($json)) return $json;
 
     // insert part
-    $json = insert_booking(array($night, $in, $out, $room_id, $customer_id));
-    // if (!JSON_isTrue($json))
-    //     update_room_status($room_id, 0); // reverse insert
-    return $json;
+    $raw = insert_booking(array($night, $in, $out, $room_id, $customer_id));
+    $json = json_decode($raw, true); // offset id out.
+    if ($json['success'] === "true") {
+        $condition = array("NumberOfNight=" . $night, "checkInDate=" . $in, "checkOutDate=" . $out, "roomID=" . $room_id, "customerID=" . $customer_id);
+        return select("Booking", "bookingID", convert_condition($condition));
+    }
+    return $raw;
 }
 
 function insert_customer(array $new_values)
@@ -173,12 +176,6 @@ function insert_payment(array $new_values)
 function insert_booking(array $new_values)
 {
     return insert("Booking", $new_values, 1); // offset id out.
-    $json = json_decode($raw, true); // offset id out.
-    if ($json['success'] === "true") {
-        $condition = array("NumberOfNight=" . $new_values[Information::NIGHT], "checkInDate=" . $new_values[Information::CHECK_IN], "checkOutDate=" . $new_values[Information::CHECK_OUT], "roomID=" . $new_values[Information::ROOM_ID], "customerID=" . $new_values[Information::CUSTOMER_ID]);
-        return select("Booking", "bookingID", convert_condition($condition));
-    }
-    return $raw;
 }
 
 function update_customer($email, $pass, array $sets)
