@@ -173,6 +173,12 @@ function insert_payment(array $new_values)
 function insert_booking(array $new_values)
 {
     return insert("Booking", $new_values, 1); // offset id out.
+    $json = json_decode($raw, true); // offset id out.
+    if ($json['success'] === "true") {
+        $condition = array("NumberOfNight=" . $new_values[Information::NIGHT], "checkInDate=" . $new_values[Information::CHECK_IN], "checkOutDate=" . $new_values[Information::CHECK_OUT], "roomID=" . $new_values[Information::ROOM_ID], "customerID=" . $new_values[Information::CUSTOMER_ID]);
+        return select("Booking", "bookingID", convert_condition($condition));
+    }
+    return $raw;
 }
 
 function update_customer($email, $pass, array $sets)
